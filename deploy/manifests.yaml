@@ -1,0 +1,51 @@
+---
+apiVersion: v1
+data:
+  index.html: |
+    hello default
+kind: ConfigMap
+metadata:
+  annotations:
+    qbec.io/component: hello
+  labels:
+    qbec.io/application: argo
+    qbec.io/environment: default
+  name: demo-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kbld.k14s.io/images: |
+      - Metas:
+        - Tag: stable
+          Type: resolved
+          URL: nginx:stable
+        URL: index.docker.io/library/nginx@sha256:26132ea371bc9b83bc5ad197fef4b1b56577893d549a997201289850daa08524
+    qbec.io/component: hello
+  labels:
+    app: demo-deploy
+    qbec.io/application: argo
+    qbec.io/environment: default
+  name: demo-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo-deploy
+  template:
+    metadata:
+      labels:
+        app: demo-deploy
+    spec:
+      containers:
+      - image: index.docker.io/library/nginx@sha256:26132ea371bc9b83bc5ad197fef4b1b56577893d549a997201289850daa08524
+        imagePullPolicy: Always
+        name: main
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: web
+      volumes:
+      - configMap:
+          name: demo-config
+        name: web

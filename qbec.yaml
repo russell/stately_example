@@ -1,0 +1,10 @@
+apiVersion: qbec.io/v1alpha1
+kind: App
+metadata:
+  name: argo
+spec:
+  environments:
+    default:
+      defaultNamespace: default
+      server: https://localhost:6443
+  vars: {}
