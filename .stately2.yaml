@@ -1,0 +1,5 @@
+apiVersion: simopolis.xyz/v1alpha1
+directories:
+- Path: greetings/hello.txt
+- Path: greetings/hello1.text
+kind: StateConfig

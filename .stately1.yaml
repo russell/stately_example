@@ -1,0 +1,4 @@
+apiVersion: simopolis.xyz/v1alpha1
+directories:
+- Path: deploy/manifests.yaml
+kind: StateConfig
