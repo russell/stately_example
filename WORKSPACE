@@ -1,9 +1,14 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 
-http_archive(
+# http_archive(
+#     name = "com_github_russell_rules_qbec",
+#     strip_prefix = "rules_qbec-main",
+#     urls = ["https://github.com/russell/rules_qbec/archive/main.zip"],
+# )
+
+local_repository(
     name = "com_github_russell_rules_qbec",
-    strip_prefix = "rules_qbec-main",
-    urls = ["https://github.com/russell/rules_qbec/archive/main.zip"],
+    path = "/home/russell/projects/bazel/rules_qbec/",
 )
 
 load("@com_github_russell_rules_qbec//qbec:qbec_deps.bzl", "qbec_repositories")
@@ -11,12 +16,12 @@ load("@com_github_russell_rules_qbec//qbec:qbec_deps.bzl", "qbec_repositories")
 qbec_repositories()
 
 http_archive(
-    name = "com_github_russell_rules_kbld",
-    strip_prefix = "rules_kbld-main",
-    urls = ["https://github.com/russell/rules_kbld/archive/main.zip"],
+    name = "com_github_russell_rules_carvel",
+    strip_prefix = "rules_carvel-main",
+    urls = ["https://github.com/russell/rules_carvel/archive/main.zip"],
 )
 
-load("@com_github_russell_rules_kbld//kbld:kbld_deps.bzl", "kbld_repositories")
+load("@com_github_russell_rules_carvel//kbld:kbld_deps.bzl", "kbld_repositories")
 
 kbld_repositories()
 
@@ -28,10 +33,15 @@ http_file(
 )
 
 
-http_archive(
+# http_archive(
+#     name = "com_github_russell_rules_stately",
+#     strip_prefix = "rules_stately-main",
+#     urls = ["https://github.com/russell/rules_stately/archive/main.zip"],
+# )
+
+local_repository(
     name = "com_github_russell_rules_stately",
-    strip_prefix = "rules_stately-main",
-    urls = ["https://github.com/russell/rules_stately/archive/main.zip"],
+    path = "/home/russell/projects/bazel/rules_stately/",
 )
 
 load("@com_github_russell_rules_stately//stately:stately_deps.bzl", "stately_repositories")
